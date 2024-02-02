@@ -1,0 +1,11 @@
+{
+    "edited_config": false,
+    "java_properly_installed": false,
+    "alternate_jar_storage": false,
+    "java_install": "",
+    "game_ram": "2048M",
+    "server_ram": "2048M",
+    "server_port": 7777,
+    "jar_folder": "jar/",
+    "content_pack_path": "contentPacks/"
+}

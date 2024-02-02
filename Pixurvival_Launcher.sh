@@ -1,24 +1,22 @@
 #!/bin/bash
 echo loading variables and functions...
-#This is to prevent people from not editting the launcher script and saying that it doesn't work. Change this variable to TRUE after looking this over and making required changes.
-edited_script=FALSE
-#Change this to TRUE if you are moving the launch script itself.
-moved_script=FALSE
+#This is to prevent people from not editting the launcher config and saying that it doesn't work. Change this variable to TRUE after looking this over and making required changes.
+edited_config=$( jq -r ".edited_config" "config.json" )
 #Change this to TRUE if you have Java properly installed on your system, it is java 8 or 11, and have your environment variables modified.
-java_properly_installed=FALSE
+java_properly_installed=$( jq -r ".java_properly_installed" "config.json" )
 #Change this to TRUE if you're like me and wanted to have your file layout be the one I showed in the Discord (only use if you are insane).
-funny_file_layout=FALSE
+alternate_jar_storage=$( jq -r ".alternate_jar_storage" "config.json" )
 
 #Define important variables here, such as the location of your Java install (leave blank if you have java in your environment variables), the location of your Pixurvival install, and RAM. If using the default port (7777), leave server_port alone.
-java_install=
-pixurvival_install=
-game_ram=2048M
-server_ram=2048M
-server_port=7777
+java_install=$( jq -r ".java_install" "config.json" )
+game_ram=$( jq -r ".game_ram" "config.json" )
+server_ram=$( jq -r ".server_ram" "config.json" )
+server_port=$( jq -r ".server_port" "config.json" )
 #Used for when funny_file_layout is TRUE
-jar_folder=jar/
+jar_folder=$( jq -r ".jar_folder" "config.json" )
+echo $jar_folder
 #If you store content packs elsewhere that isn't the working directory/pixurvival installation directory, use this to specify that path, otherwise leave as default.
-content_pack_path=contentPacks/
+content_pack_path=$( jq -r ".content_pack_path" "config.json" )
 
 
 #Do not touch anything below this line!!
@@ -30,14 +28,15 @@ pixurvival_editor=content-pack-editor.jar
 #Checks to apply options, to catch errors before they happen, and create funny launch function.
 #There likely are better ways of doing this, but I estimate that I will be finished with this by like 2 or 3 AM, so my brain power will be too limited to see them. Will go over it when I'm fully functional.
 
+#DISABLED FOR NOW
 #move to pixurvival install if script is in separate directory
-if [[ $moved_script == TRUE ]]
-then
-    cd $pixurvival_install
-fi
+#if [[ $moved_script == TRUE ]]
+#then
+#    cd $pixurvival_install
+#fi
 
 #enable java (if properly installed)
-if [[ $java_properly_installed == TRUE ]]
+if [[ $java_properly_installed == true ]]
 then
     local_java=java
 else
@@ -45,7 +44,7 @@ else
 fi
 
 #enable funny file system
-if [[ $funny_file_layout == TRUE ]]
+if [[ $alternate_jar_storage == true ]]
 then
     pixurvival_game=$jar_folder"pixurvival.jar"
     pixurvival_server=$jar_folder"server.jar"
@@ -86,7 +85,7 @@ main_menu () {
     clear && clear
     #The display and input
     echo "########################################################################"
-    echo "# Seraph's Pixurvival Launch Script v1.1.1                             #"
+    echo "# Seraph's Pixurvival Launch Script v1.2                               #"
     echo "# Please type the number for what you would like to launch             #"
     echo "#                                                                      #"
     echo "# 1. Game                                                              #"
@@ -124,42 +123,62 @@ patch_notes () {
     echo "#    providing details about the check                                 #"
     echo "# Changed:                                                             #"
     echo "#   -extended patch notes                                              #"
+    echo "#                                                                      #"
+    echo "# Seraph's Pixurvival Launch Script v1.2                               #"
+    echo "# Added:                                                               #"
+    echo "#   -config file                                                       #"
+    echo "#   -guide for config file and installation                            #"
+    echo "# Changed:                                                             #"
+    echo "#   -a lot of variable names                                           #"
+    echo "# Removed:                                                             #"
+    echo "#   -ability to move launcher anywhere on computer                     #"
     read -p "########################################################################"
     main_menu
 }
 
 echo checking sanity...
 #Perform numerous checks
-#Check to make sure people looked over their options and editted the script properly before launching.
-if [[ $edited_script == FALSE ]]
+#checks if config file exists
+if [[ -e config.json ]]
 then
-    read -p "Please open the script in your text editor of choice and modify it as instructed, then restart this script."
+    echo config found
+else
+    read -p "Could not find config.json"
     kill -9 $PPID
+fi
+
+#Check to make sure people looked over their options and editted the script properly before launching.
+if [[ $edited_config == false ]]
+then
+    read -p "Please open the config in launcher_files in your text editor of choice and modify it as instructed, then restart this script."
+    kill -9 $PPID
+else
+    echo config edited
 fi
 
 #There probably is a better way to do this, but here we go, the if chain is real this morning
 #Checks if the game, server, and content pack editor jars exist in the directory
 if [[ -e $pixurvival_game ]]
 then
-    return
+    echo game found
 else
-    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the game jar exists."
+    read -p "Please check if a typo was made, or if the game jar exists."
     kill -9 $PPID
 fi
 
 if [[ -e $pixurvival_server ]]
 then
-    return
+    echo server found
 else
-    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the server jar exists."
+    read -p "Please check if a typo was made, or if the server jar exists."
     kill -9 $PPID
 fi
 
 if [[ -e $pixurvival_editor ]]
 then
-    return
+    echo editor found
 else
-    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the content pack editor jar exists."
+    read -p "Please check if a typo was made, or if the content pack editor jar exists."
     kill -9 $PPID
 fi
 
@@ -169,7 +188,7 @@ if [[ $java_properly_installed == FALSE ]]
 then
     if [[ -x $local_java ]]
     then
-        return
+        echo java found
     else
         read -p "Please check the java path you have set, to see if it actually exists or a typo was made."
         kill -9 $PPID

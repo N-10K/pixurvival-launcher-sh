@@ -1,0 +1,31 @@
+INSTALLATION
+place all files, not including the guide, in your pixurvival folder, then edit the config
+
+EDITING THE CONFIG
+"edited_config"
+set this to true if you have finished reading and editing the config, to prevent people from saying it's broken when they haven't set it up
+
+"java_properly_installed"
+set this to true if you have java 8 or 11 running natively on your system with environment variables properly configured
+
+"alternate_jar_storage"
+set this to true if you push pixurvival jar files into a folder called "jar"
+
+"java_install"
+if you don't have java 8 or 11 properly installed, use this to point to the path of the java's home folder, otherwise leave blank
+NOTE:  don't use the bin/ folder, that is handled by the launcher
+
+"game_ram"
+used to set the RAM for the game, M for megabytes, G for gigabytes
+
+"server_ram"
+used to set the RAM for the server, M for megabytes, G for gigabytes
+
+"server_port"
+used to set the port for the server, default is 7777
+
+"jar_folder"
+used if you have "alternate_jar_storage" enabled where you have the jar files in another folder
+
+"content_pack_path"
+change this to the path where your contentpacks are stored, otherwise leave this alone
