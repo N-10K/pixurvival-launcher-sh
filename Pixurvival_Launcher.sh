@@ -86,7 +86,7 @@ main_menu () {
     clear && clear
     #The display and input
     echo "########################################################################"
-    echo "# Seraph's Pixurvival Launch Script v1.1                               #"
+    echo "# Seraph's Pixurvival Launch Script v1.1.1                             #"
     echo "# Please type the number for what you would like to launch             #"
     echo "#                                                                      #"
     echo "# 1. Game                                                              #"
@@ -103,6 +103,9 @@ main_menu () {
 patch_notes () {
     clear && clear
     echo "########################################################################"
+    echo "# Seraph's Pixurvival Launch Script v1.0                               #"
+    echo "# -initial release                                                     #"
+    echo "#                                                                      #"
     echo "# Seraph's Pixurvival Launch Script v1.1                               #"
     echo "# Added:                                                               #"
     echo "#   -variable for custom content pack directory                        #"
@@ -114,6 +117,13 @@ patch_notes () {
     echo "#   -added check if pixurvival jars exist                              #"
     echo "#   -patch notes menu                                                  #"
     echo "#   -renamed pixurvival_launch function to player_selection            #"
+    echo "#                                                                      #"
+    echo "# Seraph's Pixurvival Launch Script v1.1.1                             #"
+    echo "# Fixed:                                                               #"
+    echo "#   -stopped sanity checks from only begging the player and not        #"
+    echo "#    providing details about the check                                 #"
+    echo "# Changed:                                                             #"
+    echo "#   -extended patch notes                                              #"
     read -p "########################################################################"
     main_menu
 }
@@ -123,7 +133,7 @@ echo checking sanity...
 #Check to make sure people looked over their options and editted the script properly before launching.
 if [[ $edited_script == FALSE ]]
 then
-    read -p Please open the script in your text editor of choice and modify it as instructed, then restart this script.
+    read -p "Please open the script in your text editor of choice and modify it as instructed, then restart this script."
     kill -9 $PPID
 fi
 
@@ -133,7 +143,7 @@ if [[ -e $pixurvival_game ]]
 then
     return
 else
-    read -p Please check if you set the pixurvival installation path, if a typo was made, or if the game jar exists.
+    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the game jar exists."
     kill -9 $PPID
 fi
 
@@ -141,7 +151,7 @@ if [[ -e $pixurvival_server ]]
 then
     return
 else
-    read -p Please check if you set the pixurvival installation path, if a typo was made, or if the server jar exists.
+    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the server jar exists."
     kill -9 $PPID
 fi
 
@@ -149,7 +159,7 @@ if [[ -e $pixurvival_editor ]]
 then
     return
 else
-    read -p Please check if you set the pixurvival installation path, if a typo was made, or if the content pack editor jar exists.
+    read -p "Please check if you set the pixurvival installation path, if a typo was made, or if the content pack editor jar exists."
     kill -9 $PPID
 fi
 
@@ -161,7 +171,7 @@ then
     then
         return
     else
-        read -p Please check the java path you have set, to see if it actually exists or a typo was made.
+        read -p "Please check the java path you have set, to see if it actually exists or a typo was made."
         kill -9 $PPID
     fi
 fi
