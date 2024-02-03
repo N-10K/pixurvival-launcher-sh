@@ -1,21 +1,18 @@
 #!/bin/bash
 echo loading variables and functions...
-#This is to prevent people from not editting the launcher config and saying that it doesn't work. Change this variable to TRUE after looking this over and making required changes.
+
+#Variables that are defined in config.json, if you want to know what they do and how to use them, read guide.txt
 edited_config=$( jq -r ".edited_config" "config.json" )
-#Change this to TRUE if you have Java properly installed on your system, it is java 8 or 11, and have your environment variables modified.
 java_properly_installed=$( jq -r ".java_properly_installed" "config.json" )
-#Change this to TRUE if you're like me and wanted to have your file layout be the one I showed in the Discord (only use if you are insane).
 alternate_jar_storage=$( jq -r ".alternate_jar_storage" "config.json" )
 
-#Define important variables here, such as the location of your Java install (leave blank if you have java in your environment variables), the location of your Pixurvival install, and RAM. If using the default port (7777), leave server_port alone.
+#Important vars
+#Define in config.json
 java_install=$( jq -r ".java_install" "config.json" )
 game_ram=$( jq -r ".game_ram" "config.json" )
 server_ram=$( jq -r ".server_ram" "config.json" )
 server_port=$( jq -r ".server_port" "config.json" )
-#Used for when funny_file_layout is TRUE
 jar_folder=$( jq -r ".jar_folder" "config.json" )
-echo $jar_folder
-#If you store content packs elsewhere that isn't the working directory/pixurvival installation directory, use this to specify that path, otherwise leave as default.
 content_pack_path=$( jq -r ".content_pack_path" "config.json" )
 
 
