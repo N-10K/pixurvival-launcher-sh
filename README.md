@@ -5,7 +5,7 @@ A launcher for the open source game [Pixurvival](https://sharkhendrix.itch.io/pi
 
 ### Dependencies
 
-- ([jq](https://github.com/jqlang/jq)) (you likely have this already)
+- [jq](https://github.com/jqlang/jq) (you likely have this already)
 
 ### Installing
 
