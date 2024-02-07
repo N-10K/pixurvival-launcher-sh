@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Pixurvival_Launcher
+StartupWMClass=pixurvival_launcher
+Comment=Launcher for Pixurvival
+GenericName=Game
+Path=/path/to/pixurvival/install/
+Exec=/path/to/pixurvival/install/Pixurvival_Launcher.sh
+Icon=/path/to/pixurvival/install/img/icon.png
+Terminal=true
+Type=Application
+Categories=Games;

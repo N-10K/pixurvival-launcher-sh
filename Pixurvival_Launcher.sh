@@ -25,13 +25,6 @@ pixurvival_editor=content-pack-editor.jar
 #Checks to apply options, to catch errors before they happen, and create funny launch function.
 #There likely are better ways of doing this, but I estimate that I will be finished with this by like 2 or 3 AM, so my brain power will be too limited to see them. Will go over it when I'm fully functional.
 
-#DISABLED FOR NOW
-#move to pixurvival install if script is in separate directory
-#if [[ $moved_script == TRUE ]]
-#then
-#    cd $pixurvival_install
-#fi
-
 #enable java (if properly installed)
 if [[ $java_properly_installed == true ]]
 then
@@ -82,7 +75,7 @@ main_menu () {
     clear && clear
     #The display and input
     echo "########################################################################"
-    echo "# Seraph's Pixurvival Launch Script v1.2                               #"
+    echo "# Seraph's Pixurvival Launch Script v1.2.1                             #"
     echo "# Please type the number for what you would like to launch             #"
     echo "#                                                                      #"
     echo "# 1. Game                                                              #"
@@ -129,6 +122,15 @@ patch_notes () {
     echo "#   -a lot of variable names                                           #"
     echo "# Removed:                                                             #"
     echo "#   -ability to move launcher anywhere on computer                     #"
+    echo "#                                                                      #"
+    echo "# Seraph's Pixurvival Launch Script v1.2.1                             #"
+    echo "# Added:                                                               #"
+    echo "#   -pixurvival_launcher.desktop for starting the launcher anywhere    #"
+    echo "#    this replaces a previously removed feature                        #"
+    echo "# Changed:                                                             #"
+    echo "#   -updated README.md                                                 #"
+    echo "# Removed:                                                             #"
+    echo "#   -defunct code and comments                                         #"
     read -p "########################################################################"
     main_menu
 }
